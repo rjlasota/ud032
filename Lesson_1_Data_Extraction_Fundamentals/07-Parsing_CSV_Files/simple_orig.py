@@ -15,17 +15,12 @@ DATAFILE = "beatles-diskography.csv"
 
 def parse_file(datafile):
     data = []
-    fields = []      # column headers
     with open(datafile, "rb") as f:
-        for i, line in enumerate(f):
-            words = [word.strip() for word in line.split(',')]
-            if not fields:
-                fields = words       # first line has field headers
-            else:
-                data.append(dict(zip(fields,words)))
-            if i >= 10:
-                break
+        for line in f:
+            print line
+
     return data
+
 
 def test():
     # a simple test of your implemetation

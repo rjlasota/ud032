@@ -24,13 +24,10 @@ def parse_file(datafile):
     name = ""
     data = []
     with open(datafile,'rb') as f:
-        reader = csv.reader(f)
-        name = reader.next()[1]
-        reader.next()     # skip headers
-        for datarow in reader:
-            data.append(datarow)
+        pass
     # Do not change the line below
     return (name, data)
+
 
 def test():
     datafile = os.path.join(DATADIR, DATAFILE)

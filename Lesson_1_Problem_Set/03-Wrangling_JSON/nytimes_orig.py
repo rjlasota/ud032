@@ -36,12 +36,12 @@ def get_from_file(kind, period):
 
 def article_overview(kind, period):
     data = get_from_file(kind, period)
+    titles = []
+    urls =[]
     # YOUR CODE HERE
-    titles = [ {dict['section'] : dict['title']} for dict in data ]
-    urls = [meta['url'] for dict in data
-                    for medium in dict['media']
-                    for meta in medium['media-metadata'] if meta['format'] == 'Standard Thumbnail' ]
+
     return (titles, urls)
+
 
 def query_site(url, target, offset):
     # This will set up the query with the API key and offset

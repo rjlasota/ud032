@@ -16,35 +16,18 @@ def open_zip(datafile):
         myzip.extractall()
 
 
-def get_col_max(sheet, column):
-    """
-    returns ['AREA_NAME', year, month, day, hour, max load]
-    for column of sheet
-    """
-    col_data = sheet.col_values(column,start_rowx=1)    
-    
-    max_value = max(col_data)
-    max_index = col_data.index(max_value) 
-    max_time = xlrd.xldate_as_tuple(sheet.cell_value(max_index + 1, 0),0)   
-
-    col_name = [sheet.cell_value(0,column)]  # get column name (region)
-    col_max = col_name + list(max_time)[:4] + [max_value]  # concatenate data into one list
-    return col_max
-
 def parse_file(datafile):
     workbook = xlrd.open_workbook(datafile)
     sheet = workbook.sheet_by_index(0)
+    data = None
     # YOUR CODE HERE
     # Remember that you can use xlrd.xldate_as_tuple(sometime, 0) to convert
     # Excel date to Python tuple of (year, month, day, hour, minute, second)
-    header = [u'Station',u'Year',u'Month',u'Day',u'Hour',u'Max Load']
-    data = [header] + [get_col_max(sheet, i) for i in range(1,9)]
     return data
 
 def save_file(data, filename):
-    with open(filename, 'wb') as f:
-        w = csv.writer(f, delimiter = '|')
-        w.writerows(data)
+    # YOUR CODE HERE
+
     
 def test():
     open_zip(datafile)
