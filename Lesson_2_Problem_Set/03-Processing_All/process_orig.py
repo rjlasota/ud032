@@ -39,26 +39,13 @@ def process_file(f):
     #         },
     #         {"courier": "..."}
     # ]
-    import collections
-    airline_data = collections.namedtuple('airline_data','year month domestic international total')
     data = []
     info = {}
     info["courier"], info["airport"] = f[:6].split("-")
     
     with open("{}/{}".format(datadir, f), "r") as html:
+
         soup = BeautifulSoup(html)
-    for item in soup.select("tr.dataTDRight"):
-        row_tuple = airline_data(*[el.string.replace(',','') for el in item.children 
-                        if u'\n' not in el.string])
-        if row_tuple.month == 'TOTAL':
-            continue
-        dict_info = { "courier": info["courier"],
-                      "airport": info["airport"],
-                      "year": int(row_tuple.year),
-                      "month": int(row_tuple.month),
-                      "flights": {"domestic": int(row_tuple.domestic),
-                                  "international": int(row_tuple.international)}}
-        data.append(dict_info)
 
     return data
 

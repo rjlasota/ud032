@@ -14,11 +14,12 @@ html_page = "page_source.html"
 def extract_data(page):
     data = {"eventvalidation": "",
             "viewstate": ""}
-    with open(page) as html:
-        soup = BeautifulSoup(html)
-    data['eventvalidation'] = soup.find(id='__EVENTVALIDATION')['value']
-    data['viewstate'] =  soup.find(id='__VIEWSTATE')['value']
+    with open(page, "r") as html:
+        # do something here to find the necessary values
+        pass
+
     return data
+
 
 def make_request(data):
     eventvalidation = data["eventvalidation"]

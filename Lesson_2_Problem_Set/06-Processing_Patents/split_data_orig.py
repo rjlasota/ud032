@@ -20,18 +20,8 @@ def split_file(filename):
     # As a hint - each patent declaration starts with the same line that was causing the error
     # The new files should be saved with filename in the following format:
     # "{}-{}".format(filename, n) where n is a counter, starting from 0.
-    with open(filename) as f:
-        first_line = f.readline()
-        n = 0
-        g = open('{}-{}'.format(filename, n),'w')
-        g.write(first_line)
-        for line in f:
-            if line == first_line:
-                g.close()
-                n = n + 1
-                g = open('{}-{}'.format(filename, n),'w')
-            g.write(line)
-        g.close()
+
+    pass
 
 
 def test():

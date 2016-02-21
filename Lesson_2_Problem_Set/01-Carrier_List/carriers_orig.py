@@ -19,9 +19,7 @@ def extract_carriers(page):
     with open(page, "r") as html:
         # do something here to find the necessary values
         soup = BeautifulSoup(html)
-        cl_tag = soup.find(id='CarrierList')
-        data = [child['value'] for child in cl_tag.children 
-                if child.name == 'option' and 'All' not in child['value']]
+
     return data
 
 
