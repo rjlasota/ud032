@@ -18,41 +18,19 @@ import codecs
 import csv
 import json
 import pprint
-from collections import defaultdict
 
 CITIES = 'cities.csv'
 
-FIELDS = [
-    "name", "timeZone_label", "utcOffset", "homepage", "governmentType_label", "isPartOf_label", "areaCode", "populationTotal",
-    "elevation", "maximumElevation", "minimumElevation", "populationDensity", "wgs84_pos#lat", "wgs84_pos#long",
-    "areaLand", "areaMetro", "areaUrban"]
-
-
-def find_type(string):
-    if not string or string == 'NULL':
-        return type(None)
-    elif string[0] == '{':
-        return type(list())
-    try:
-        int(string)
-        return type(int())
-    except:
-        pass
-    try:
-        float(string)
-        return type(float())
-    except:
-        return type(str())
-
+FIELDS = ["name", "timeZone_label", "utcOffset", "homepage", "governmentType_label", "isPartOf_label", "areaCode", "populationTotal", 
+          "elevation", "maximumElevation", "minimumElevation", "populationDensity", "wgs84_pos#lat", "wgs84_pos#long", 
+          "areaLand", "areaMetro", "areaUrban"]
 
 def audit_file(filename, fields):
-    fieldtypes = defaultdict(set)
-    with open(filename, "r") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if 'dbpedia.org' in row['URI']:
-                for fn in fields:
-                    fieldtypes[fn].add(find_type(row[fn]))
+    fieldtypes = {}
+
+    # YOUR CODE HERE
+
+
     return fieldtypes
 
 
@@ -63,6 +41,6 @@ def test():
 
     assert fieldtypes["areaLand"] == set([type(1.1), type([]), type(None)])
     assert fieldtypes['areaMetro'] == set([type(1.1), type(None)])
-
+    
 if __name__ == "__main__":
     test()

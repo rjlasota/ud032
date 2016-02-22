@@ -20,50 +20,12 @@ import pprint
 CITIES = 'cities.csv'
 
 
-def find_type(string):
-    if not string or string == 'NULL':
-        return type(None)
-    elif string[0] == '{':
-        return type(list())
-    try:
-        int(string)
-        return type(int())
-    except:
-        pass
-    try:
-        float(string)
-        return type(float())
-    except:
-        return type(str())
-
-
 def fix_area(area):
 
-    def none_type(area):
-        return None
+    # YOUR CODE HERE
 
-    def list_type(area):
-        area_values = area[1:-1].split('|')
-        area_lens = [len(item) for item in area_values]
-        max_idx = area_lens.index(max(area_lens))
-        return float(area_values[max_idx])
+    return area
 
-    def int_type(area):
-        return float(area)
-
-    def float_type(area):
-        return float(area)
-
-    def str_type(area):
-        return None
-
-    process_type = {type(None): none_type,
-                    type(list()): list_type,
-                    type(int()): int_type,
-                    type(float()): float_type,
-                    type(str()): str_type}
-
-    return process_type[find_type(area)](area)
 
 
 def process_file(filename):
@@ -73,7 +35,7 @@ def process_file(filename):
     with open(filename, "r") as f:
         reader = csv.DictReader(f)
 
-        # skipping the extra matadata
+        #skipping the extra matadata
         for i in range(3):
             l = reader.next()
 
@@ -91,7 +53,7 @@ def test():
     data = process_file(CITIES)
 
     print "Printing three example results:"
-    for n in range(5, 8):
+    for n in range(5,8):
         pprint.pprint(data[n]["areaLand"])
 
     assert data[8]["areaLand"] == 55166700.0

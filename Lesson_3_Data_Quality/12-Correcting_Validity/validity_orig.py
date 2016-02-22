@@ -18,7 +18,6 @@ You can write helper functions for checking the data and writing the files, but 
 """
 import csv
 import pprint
-from dateutil import parser
 
 INPUT_FILE = 'autos.csv'
 OUTPUT_GOOD = 'autos-valid.csv'
@@ -26,29 +25,21 @@ OUTPUT_BAD = 'FIXME-autos.csv'
 
 def process_file(input_file, output_good, output_bad):
 
-    with open(input_file, "r") as f, \
-         open(output_good, "w") as g, \
-         open(output_bad, "w") as h:
+    with open(input_file, "r") as f:
         reader = csv.DictReader(f)
         header = reader.fieldnames
-        writer_good = csv.DictWriter(g, delimiter=",", fieldnames= header)
-        writer_good.writeheader()
-        writer_bad = csv.DictWriter(h, delimiter=",", fieldnames= header)
-        writer_bad.writeheader()
-        for row in reader:
-            if 'dbpedia.org' in row['URI']:
-                try:
-                    # use dateutil for first parse:
-                    year = parser.parse(row['productionStartYear']).year 
-                    # but don't trust it's output:    
-                    year = int(row['productionStartYear'][:4])               
-                    row['productionStartYear'] = year
-                except:
-                    year = 0
-                if year >= 1886 and year <= 2014:
-                    writer_good.writerow(row)
-                else:
-                    writer_bad.writerow(row)
+
+        #COMPLETE THIS FUNCTION
+
+
+
+    # This is just an example on how you can use csv.DictWriter
+    # Remember that you have to output 2 files
+    with open(output_good, "w") as g:
+        writer = csv.DictWriter(g, delimiter=",", fieldnames= header)
+        writer.writeheader()
+        for row in YOURDATA:
+            writer.writerow(row)
 
 
 def test():

@@ -4,7 +4,7 @@
 In this problem set you work with cities infobox data, audit it, come up with a cleaning idea and then clean it up.
 
 In the previous quiz you recognized that the "name" value can be an array (or list in Python terms).
-It would make it easier to process and query the data later, if all values for the name
+It would make it easier to process and query the data later, if all values for the name 
 would be in a Python list, instead of being just a string separated with special characters, like now.
 
 Finish the function fix_name(). It will recieve a string as an input, and it has to return a list
@@ -19,54 +19,18 @@ import pprint
 CITIES = 'cities.csv'
 
 
-def find_type(string):
-    if not string or string == 'NULL':
-        return type(None)
-    elif string[0] == '{':
-        return type(list())
-    try:
-        int(string)
-        return type(int())
-    except:
-        pass
-    try:
-        float(string)
-        return type(float())
-    except:
-        return type(str())
-
-
 def fix_name(name):
 
-    def none_type(name):
-        return []
+    # YOUR CODE HERE
 
-    def list_type(name):
-        return name[1:-1].split('|')
-
-    def int_type(name):
-        return None
-
-    def float_type(name):
-        return None
-
-    def str_type(name):
-        return [name]
-
-    process_type = {type(None): none_type,
-                    type(list()): list_type,
-                    type(int()): int_type,
-                    type(float()): float_type,
-                    type(str()): str_type}
-
-    return process_type[find_type(name)](name)
+    return name
 
 
 def process_file(filename):
     data = []
     with open(filename, "r") as f:
         reader = csv.DictReader(f)
-        # skipping the extra matadata
+        #skipping the extra matadata
         for i in range(3):
             l = reader.next()
         # processing file
